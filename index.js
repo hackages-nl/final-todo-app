@@ -1,18 +1,20 @@
 let addBtn;
 let todoInput;
 let todoList;
+let doneBtn;
 
 window.addEventListener("DOMContentLoaded", () => {
   // 1 - Get a reference to elements by Ids
   addBtn = document.getElementById("addBtn");
   todoInput = document.getElementById("todoInput");
   todoList = document.getElementById("todos");
+  doneBtn = document.getElementById("doneBtn");
 
   const deleteBtn = document.getElementById("deleteBtn");
-  const doneBtn = document.getElementById("doneBtn");
 
   // 2 - Register events handlers
   addBtn.addEventListener("click", addTodo);
+  doneBtn.addEventListener("click", doneTodo);
 });
 
 const todos = [];
@@ -32,7 +34,7 @@ function displayTodo(todoDescription) {
   const li = document.createElement("li");
   li.innerHTML = todoDescription;
   // add Done button
-  const doneButton = createButton("Done", doneTodo);
+  const doneButton = createButton("Done", doneTodo.bind(null, li));
   li.append(doneButton);
 
   // add Delete button
@@ -48,5 +50,8 @@ function createButton(text, handler) {
   return btn;
 }
 
-function doneTodo() {}
+function doneTodo(el) {
+  el.classList.add("done");
+}
+
 function deleteTodo() {}
